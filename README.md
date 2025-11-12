@@ -1,7 +1,7 @@
 # Astro Starter Kit: Basics
 
 ```sh
-npm create astro@latest -- --template basics
+git clone https://github.com/abcdavk/restoran-bekicot/
 ```
 
 > 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
@@ -16,13 +16,15 @@ Inside of your Astro project, you'll see the following folders and files:
 │   └── favicon.svg
 ├── src
 │   ├── assets
-│   │   └── astro.svg
+│   │   └── ...
 │   ├── components
-│   │   └── Welcome.astro
+│   │   └── ...
 │   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
+│   │   └── ...
+│   ├── pages
+│   │   └── index.astro
+│   └── scripts
+│       └── database.ts
 └── package.json
 ```
 
