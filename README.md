@@ -4,7 +4,6 @@
 git clone https://github.com/abcdavk/restoran-bekicot/
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
 ## 🚀 Project Structure
 
