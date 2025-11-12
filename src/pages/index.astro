@@ -3,6 +3,8 @@ import Navbar from '../components/Navbar.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Layout from '../layouts/Layout.astro';
 import LeftContent from '../components/LeftContent.astro';
+import RightContent from '../components/RightContent.astro';
+import '../scripts/database';
 ---
 
 <Layout>
@@ -10,7 +12,6 @@ import LeftContent from '../components/LeftContent.astro';
     <div class="div1"><Sidebar /></div>
     <div class="div2"><Navbar /></div>
     <div class="div3"><LeftContent /></div>
-    <div class="div4"><LeftContent /></div>
   </div>
 </Layout>
 
@@ -29,10 +30,9 @@ import LeftContent from '../components/LeftContent.astro';
   }
 
   .div1 {
+	background: #eee;
     grid-row: 1 / 3;
     grid-column: 1 / 2;
-    background: #eee;
-    position: sticky;
     top: 0;
     height: 100vh;
   }
@@ -49,9 +49,9 @@ import LeftContent from '../components/LeftContent.astro';
     padding: 10px;
   }
 
-  .div4 {
+  /* .div4 {
     grid-column: 3 / 4;
     grid-row: 2 / 3;
     padding: 10px;
-  }
+  } */
 </style>

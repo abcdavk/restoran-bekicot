@@ -1,11 +1,12 @@
+---
+import Card from './Card.astro'
+import { getDatabase } from '../scripts/database'
+
+const { res: menus } = await getDatabase("menu") as any;
+---
+
 <div>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ex a purus imperdiet pulvinar quis in tellus. Curabitur semper felis in lectus volutpat laoreet. Nunc sed pellentesque tortor. Nulla euismod mauris vitae suscipit consectetur. Vestibulum placerat porttitor ultricies. Duis porttitor vel urna maximus condimentum. In et ornare nisi, varius aliquam sem. Nulla facilisi. Donec molestie ornare placerat.
-
-Curabitur vel libero vehicula metus finibus aliquam. Donec sed mollis turpis. Nam lacinia nunc at aliquam pretium. Nam ac fringilla nibh. Suspendisse a efficitur eros. Duis ac scelerisque lorem. Vestibulum dolor diam, luctus in quam rhoncus, elementum iaculis dui. Vestibulum et mi mollis, commodo magna sollicitudin, dictum urna. Sed mattis sit amet nisl et dictum. Vivamus cursus tellus libero, a malesuada mauris commodo a. Donec quis quam sit amet dui feugiat gravida. Mauris mattis purus eget diam fringilla gravida.
-
-Aliquam congue euismod interdum. Mauris dictum efficitur suscipit. Nullam porttitor gravida nisi, at pulvinar quam euismod eget. Morbi suscipit velit vitae neque laoreet, vitae porta elit tempor. Curabitur placerat neque malesuada volutpat egestas. Nam at lobortis ipsum. Sed efficitur ultricies lorem, in consectetur ex. Nulla facilisi. Cras ac tincidunt tortor. Sed in faucibus nibh, id blandit sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed ut dapibus ipsum, nec venenatis magna. Curabitur turpis ipsum, aliquam quis arcu ac, euismod tempus urna. Suspendisse non luctus dui. Nullam eleifend orci ultricies massa luctus placerat. Pellentesque eros sapien, elementum in orci ac, pellentesque condimentum eros.
-
-Maecenas commodo lectus id leo bibendum lacinia. Cras in nulla ante. Nam rhoncus sodales mi quis congue. Nullam eget venenatis elit. Ut malesuada neque mauris, ac vehicula metus varius non. Nam consectetur est magna, vel lacinia augue tincidunt aliquet. Quisque est libero, porta nec ipsum in, facilisis varius metus. Pellentesque porttitor tellus eget arcu fringilla, at hendrerit est elementum. Proin gravida egestas lacus nec dapibus.
-
-Nullam vestibulum sapien vitae massa faucibus volutpat. In risus neque, dignissim id neque porta, convallis vehicula ipsum. Vivamus ac ornare ex. Donec eleifend pulvinar augue at rutrum. Mauris porta fringilla neque, quis dictum odio euismod et. Donec vulputate nibh ac gravida maximus. Aenean convallis lacinia tincidunt. Phasellus volutpat porta nibh, eget tempor elit consectetur a. Donec sagittis eu ante eu malesuada.
+    {
+        menus?.map((menu: any) => <Card nama={menu.nama} harga={menu.harga} deskripsi={menu.deskripsi} deskripsi={menu.deskripsi} status={menu.status} />)
+    }
 </div>

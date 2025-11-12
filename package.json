@@ -9,6 +9,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.15.5"
+    "astro": "^5.15.5",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "@types/mysql": "^2.15.27"
   }
 }
