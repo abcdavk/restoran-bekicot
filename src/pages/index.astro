@@ -2,17 +2,13 @@
 import Navbar from '../components/Navbar.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Layout from '../layouts/Layout.astro';
-import LeftContent from '../components/LeftContent.astro';
-import RightContent from '../components/RightContent.astro';
+import Content from '../components/Content.astro';
 import '../scripts/database';
 ---
 
 <Layout>
-  <div class="parent">
-    <div class="div1"><Sidebar /></div>
-    <div class="div2"><Navbar /></div>
-    <div class="div3"><LeftContent /></div>
-  </div>
+  <Navbar />
+  <Content />
 </Layout>
 
 <style>
@@ -20,38 +16,4 @@ import '../scripts/database';
     height: 100%;
     margin: 0;
   }
-
-  .parent {
-    display: grid;
-    grid-template-columns: 250px 1fr 1fr;
-    grid-template-rows: auto 1fr;
-    gap: 8px;
-    height: 100vh;
-  }
-
-  .div1 {
-	background: #eee;
-    grid-row: 1 / 3;
-    grid-column: 1 / 2;
-    top: 0;
-    height: 100vh;
-  }
-
-  .div2 {
-    grid-column: 2 / 4;
-    grid-row: 1 / 2;
-    padding: 10px;
-  }
-
-  .div3 {
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
-    padding: 10px;
-  }
-
-  /* .div4 {
-    grid-column: 3 / 4;
-    grid-row: 2 / 3;
-    padding: 10px;
-  } */
 </style>

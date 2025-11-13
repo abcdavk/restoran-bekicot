@@ -1,22 +1,127 @@
 ---
 import astroLogo from '../assets/astro.svg';
-import background from '../assets/background.svg';
 ---
 
-
-<nav>
-	<h1>
-		RBNHL
-	</h1>
+<nav class="navbar">
+	<div class="navbar-left">
+		<h1 class="title">Restoran Bekicot </h1>
+	</div>
+	<button id="openBtn" class="menu-btn">☰</button>
 </nav>
 
+<aside id="mySidebar" class="sidebar">
+	<button id="closeBtn" class="close-btn">&times;</button>
+	<a href="#" class="nav-link">Home</a>
+	<a href="#" class="nav-link">About</a>
+	<a href="#" class="nav-link">Contact</a>
+</aside>
+
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		const sidebar = document.getElementById("mySidebar");
+		const openBtn = document.getElementById("openBtn");
+		const closeBtn = document.getElementById("closeBtn");
+
+		if (!sidebar || !openBtn || !closeBtn) return;
+
+		openBtn.addEventListener("click", () => {
+			sidebar.classList.add("active");
+		});
+
+		closeBtn.addEventListener("click", () => {
+			sidebar.classList.remove("active");
+		});
+	});
+</script>
+
 <style>
-	nav {
+	.navbar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0.75rem 1.25rem;
+		background: #fff;
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+		position: sticky;
+		top: 0;
+		z-index: 50;
 	}
 
-	h1 {
-		font-size: xx-large;
-		color: #FF9843;
-		font-family: 'Times New Roman', Times, serif;
+	.navbar-left {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+	.logo {
+		width: 30px;
+		height: 30px;
+	}
+
+	.title {
+		font-size: 1.1rem;
+		font-weight: 600;
+		color: #222;
+		margin: 0;
+	}
+
+	.menu-btn {
+		background: none;
+		border: none;
+		font-size: 1.5rem;
+		cursor: pointer;
+		color: #333;
+		transition: 0.2s;
+	}
+
+	.menu-btn:hover {
+		color: #000;
+		transform: scale(1.1);
+	}
+
+	.sidebar {
+		position: fixed;
+		top: 0;
+		right: -300px; 
+		width: 250px;
+		height: 100vh;
+		background: #f9f9f9;
+		box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 1rem;
+		transition: right 0.3s ease;
+		z-index: 100;
+	}
+
+	.sidebar.active {
+		right: 0;
+	}
+
+	.close-btn {
+		align-self: flex-end;
+		font-size: 1.5rem;
+		background: none;
+		border: none;
+		cursor: pointer;
+		color: #333;
+		margin-bottom: 1rem;
+	}
+
+	.nav-link {
+		text-decoration: none;
+		color: #333;
+		font-size: 1rem;
+		margin: 0.5rem 0;
+		padding: 0.5rem;
+		width: 100%;
+		border-radius: 6px;
+		transition: background 0.2s, color 0.2s;
+	}
+
+	.nav-link:hover {
+		background: #eaeaea;
+		color: #111;
 	}
 </style>
