@@ -1,28 +1,20 @@
 ---
 import { Image } from "astro:assets";
 import Bekicot from '../assets/bekicot.jpg';
-
+import * as ImageLoader from '../scripts/imageLoader'
 const { id_menu, nama, harga, deskripsi, kategori, status } = Astro.props;
-
-const modules = import.meta.glob<{ default: ImageMetadata }>('/src/assets/menu/*.{jpg,jpeg,png,gif}', {
-  eager: true
-});
-
-const images = Object.keys(modules)
-  .sort()
-  .map(path => modules[path].default);
 
 
 ---
 
 <div class="card">
-  <Image src={images[id_menu-1] ?? Bekicot } alt="Bekicot" />
+  <Image src={ImageLoader.images[id_menu-1] ?? Bekicot } alt="Bekicot" />
   <div class="card-content">
     <h3>{nama}</h3>
     <p>{deskripsi}</p>
     <span>Status: {status}</span> 
   </div>
-  <a href="" class="btn">Rp {harga},00</a>
+  <a href={`/pesan?id_menu=${id_menu}`} class="btn">Rp {harga},00</a>
 </div>
 
 <style>

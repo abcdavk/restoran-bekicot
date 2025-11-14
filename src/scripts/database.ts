@@ -12,9 +12,9 @@ con.connect((err) => {
     console.log("Terhubung jir")
 });
 
-export function getDatabase(tableName: string) {
+export function getDatabase(tableName: string, filter: string = "") {
     return new Promise((resolve, reject) => {
-        con.query(`SELECT * FROM ${tableName}`, (err, res) => {
+        con.query(`SELECT * FROM ${tableName} ${filter}`, (err, res) => {
             if (err) console.error(err);
             resolve({ res });
         })

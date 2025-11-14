@@ -1,0 +1,134 @@
+---
+import Bekicot from "../assets/bekicot.jpg"
+import Image from "astro/components/Image.astro";
+import Navbar from "../components/Navbar.astro";
+import Layout from "../layouts/Layout.astro";
+import Meja from "../components/Meja.astro"
+import * as ImageLoader from "../scripts/imageLoader";
+import {  getDatabase } from "../scripts/database";
+
+const { res: dataMeja } = await getDatabase("meja") as any;
+// biar bisa ngambil parameter url
+export const prerender = false;
+
+const { id_menu } = Object.fromEntries(Astro.url.searchParams.entries());
+
+const { res: menus } = await getDatabase("menu", `WHERE id_menu = ${id_menu}`) as any;
+const menu = menus[0]
+
+---
+
+<Layout>
+    <Navbar />
+    <div class="container">
+        <h2 class="container-item">{menu.nama}</h2>
+        <hr>
+        <div class="container-item">
+            <h3>Pesanan Anda</h3>
+            <div class="pesanan">
+                <Image src={ImageLoader.images[parseInt(menu.id_menu)-1] ?? Bekicot} alt="menu" />
+                <div class="info-pesanan">
+                    <div>
+                        <p class="nama">{menu.nama}</p>
+                        <p>{menu.deskripsi}</p>
+                    </div>
+                    <div>
+                        <p class="harga">Rp {menu.harga},00</p>
+                    </div>
+                </div>
+            </div>
+            <h3>Detail Pesanan</h3>
+            <div class="detail-pesanan">
+                <p>Pilih meja: </p>
+                <Meja dataMeja={dataMeja}/>
+            </div>
+        </div>
+        <div class="container-item">
+            <a href="" class="checkout">Pesan</a>
+        </div>
+    </div>
+</Layout>
+
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    .container {
+        padding: 2px 0px;
+        margin: 10px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0px 2px 4px rgb(0, 0, 0, 0.2);
+    }
+
+    hr {
+        border: 1px dashed #f0f0f0;
+    }
+
+    .container-item {
+        margin: 20px 30px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .pesanan {
+        background-color: #f0f0f0;
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        gap: 10px;
+    }
+
+    .detail-pesanan {
+        background-color: #f0f0f0;
+        padding: 0px 20px;
+        border-radius: 8px;
+    }
+
+    .pesanan img {
+        width: 120px;
+        height: 100%;
+    }
+
+    .info-pesanan {
+        line-height: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .nama {
+        font-weight: bold;
+    }
+
+    .harga {
+        font-size: large;
+        font-weight: 600;
+        color: #1581e7;
+    }
+
+    .checkout {
+        transition: all 0.4s ease-in-out;
+		padding: 10px;
+        text-decoration: none;
+        background-color: #1581e7;
+        border-radius: 8px;
+        text-align: center;
+        color: #fff;
+		cursor: pointer;
+    }
+
+    .checkout:hover {
+        background-color: #136cc0;
+    }
+
+    @media only screen and (min-width: 900px) {
+        .container {
+            justify-content: center;
+            width: 60%;
+            margin: auto;
+        }
+    }
+</style>

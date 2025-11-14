@@ -4,7 +4,7 @@ import astroLogo from '../assets/astro.svg';
 
 <nav class="navbar">
 	<div class="navbar-left">
-		<h1 class="title">Restoran Bekicot </h1>
+		<h1 class="title"><a href="/menu">Restoran Bekicot</a></h1>
 	</div>
 	<button id="openBtn" class="menu-btn">☰</button>
 </nav>
@@ -61,8 +61,11 @@ import astroLogo from '../assets/astro.svg';
 	.title {
 		font-size: 1.1rem;
 		font-weight: 600;
-		color: #222;
 		margin: 0;
+	}
+
+	.title a {
+		color: #222;
 	}
 
 	.menu-btn {

@@ -1,0 +1,33 @@
+---
+const { dataMeja } = Astro.props;
+
+// biar parameternya ga nambah nambah terus kasih split()
+let params = Astro.url.search.split("&")[0];
+---
+
+<div>
+    <div class="grid-meja">
+        {
+            dataMeja?.map((meja: any) => <a href={`/pesan${params}&id_meja=${meja.id_meja}`} id="pilihMeja" class="meja" style={meja.status === "kosong" ? "background-color: #136cc0;" : "background-color: #ff8176;"}>{meja.id_meja}</a>)
+        }
+    </div>
+</div>
+
+<script>
+</script>
+
+<style>
+    .grid-meja {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        gap: 8px;
+    } 
+    .grid-meja .meja {
+        color: #fff;
+        padding: 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+</style>
