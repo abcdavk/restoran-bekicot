@@ -1,0 +1,54 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Sidebar from '../components/Sidebar.astro';
+import Layout from '../layouts/Layout.astro';
+import DaftarMenu from '../components/Menu.astro';
+import '../scripts/database';
+export const prerender = false;
+
+const kategoriMenu = Astro.url.searchParams.get("kategori") ?? "semua";
+
+---
+
+<Layout>
+  
+  <Navbar />
+  <div class="kategori">
+      <a href="?kategori=makanan">Makanan</a>
+      <a href="?kategori=minuman">Minuman</a>
+      <a href="?kategori=semua">Semua</a>
+  </div>
+  <DaftarMenu kategori={kategoriMenu}/>
+</Layout>
+
+
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+  
+  .kategori {
+      display: flex;
+      justify-content: center;
+      margin: 10px;
+      padding: 30px 0px;
+      background-color: #333;
+      color: #fff;
+      border-radius: 8px;
+      gap: 40px;
+  }
+
+  .kategori a {
+      color: #fff;
+      text-decoration: none;
+      transition: all 0.4s ease-in-out;
+      padding: 15px;
+      background-color: rgb(0, 0, 0, 0.4);
+  }
+
+  .kategori a:hover {
+      color: #000;
+      background-color: #fff;
+  }
+</style>

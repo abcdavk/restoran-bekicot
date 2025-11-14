@@ -1,19 +1,97 @@
 ---
-import Navbar from '../components/Navbar.astro';
-import Sidebar from '../components/Sidebar.astro';
-import Layout from '../layouts/Layout.astro';
-import Content from '../components/Content.astro';
-import '../scripts/database';
+import Layout from "../layouts/Layout.astro"
 ---
 
 <Layout>
-  <Navbar />
-  <Content />
+	<div class="container">
+		<div>
+			<p>Selamat Datang di</p>
+			<h1>Restoran Bekicot Ngawi Hitam Legam</h1>
+			<form id="loginForm">
+				<div>
+					<label><b>Username</b></label>
+					<input type="text" placeholder="Masukkan Username" id="uname" required>
+
+					<label><b>Password</b></label>
+					<input type="password" placeholder="Masukkan Password" id="pswd" required>
+
+					<button type="submit">Login</button>
+				</div>
+			</form> 
+		</div>
+	</div>
 </Layout>
 
+
+<script>
+  	document.getElementById("loginForm")?.addEventListener("submit", (e) => {
+		e.preventDefault();
+
+		const uname = (document.getElementById("uname") as HTMLInputElement);
+		const pswd = (document.getElementById("pswd") as HTMLInputElement);
+		if (uname.value === "admin" && pswd.value === "#admin123") {
+			window.location.href = "/menu";
+		} else if (uname.value === "user" && pswd.value === "#user123") {
+			window.location.href = "/menu";
+		} else {
+			alert("Login Gagal wkwk")
+		}
+    });
+</script>
+
 <style>
-  html, body {
-    height: 100%;
-    margin: 0;
-  }
+	input:focus {
+		outline: none;
+	}
+
+
+	html, body {
+		height: 100%;
+		margin: 0;
+		overflow: hidden;
+		min-height: 100vh;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	@keyframes fadeIn {
+		to {
+			opacity: 2;
+		}
+	}
+
+	h1 {
+		line-height: 0.2em;
+		font-size: x-large;
+	}
+
+	.container {
+		opacity: 0;
+		animation: fadeIn 1s forwards;
+		margin: 33% 0px;
+		padding: 30px 30px;
+		background-color: #333;
+		color: #fff;
+	}
+	
+	
+	button {
+		border: none;
+		padding: 10px;
+		margin-bottom: 24px;
+		width: 100%;
+		cursor: pointer;
+	}
+
+	input[type=text], input[type=password] {
+		width: 100%;
+		padding: 12px 20px;
+		margin: 8px 0;
+		border: none;
+		box-sizing: border-box;
+		color: #fff;
+		background-color: rgba(255, 255, 255, 0.2);
+	}
 </style>

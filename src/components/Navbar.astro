@@ -9,16 +9,16 @@ import astroLogo from '../assets/astro.svg';
 	<button id="openBtn" class="menu-btn">☰</button>
 </nav>
 
-<aside id="mySidebar" class="sidebar">
+<div id="sidebarList" class="sidebar">
 	<button id="closeBtn" class="close-btn">&times;</button>
 	<a href="#" class="nav-link">Home</a>
 	<a href="#" class="nav-link">About</a>
 	<a href="#" class="nav-link">Contact</a>
-</aside>
+</div>
 
 <script>
 	document.addEventListener("DOMContentLoaded", () => {
-		const sidebar = document.getElementById("mySidebar");
+		const sidebar = document.getElementById("sidebarList");
 		const openBtn = document.getElementById("openBtn");
 		const closeBtn = document.getElementById("closeBtn");
 

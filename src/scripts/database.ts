@@ -20,3 +20,16 @@ export function getDatabase(tableName: string) {
         })
     })
 }
+
+export function getMenuDB(kategori: string) {
+    if (kategori === "semua") {
+        return getDatabase("menu");
+    } else {
+        return new Promise((resolve, reject) => {
+            con.query(`SELECT * FROM menu where kategori = '${kategori}'`, (err, res) => {
+                if (err) console.error(err);
+                resolve({ res });
+            })
+        })
+    }
+}
