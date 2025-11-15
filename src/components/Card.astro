@@ -14,7 +14,7 @@ const { id_menu, nama, harga, deskripsi, kategori, status } = Astro.props;
     <p>{deskripsi}</p>
     <span>Status: {status}</span> 
   </div>
-  <a href={`/pesan?id_menu=${id_menu}`} class="btn">Rp {harga},00</a>
+  <a href={`/pesan?id_menu=${id_menu}&jumlah_pesanan=1,`} class="btn">Rp {harga},00</a>
 </div>
 
 <style>

@@ -2,26 +2,35 @@
 const { dataMeja } = Astro.props;
 
 // biar parameternya ga nambah nambah terus kasih split()
-let params = Astro.url.search.split("&")[0];
+let params = Astro.url.search.split(",")[0];
 ---
 
 <div>
     <div class="grid-meja">
         {
-            dataMeja?.map((meja: any) => <a href={`/pesan${params}&id_meja=${meja.id_meja}`} id="pilihMeja" class="meja" style={meja.status === "kosong" ? "background-color: #136cc0;" : "background-color: #ff8176;"}>{meja.id_meja}</a>)
+            dataMeja?.map((meja: any) => <a href={`/pesan${params},&id_meja=${meja.id_meja}`} id={`pilihMeja${meja.id_meja}`} class={meja.status === "kosong" ? "meja kosong" : "meja digunakan"}>{meja.id_meja}</a>)
         }
     </div>
 </div>
 
 <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const id_meja = new URLSearchParams(window.location.search).get("id_meja")
+        if (!id_meja) return;
+        const pilihMeja = document.getElementById("pilihMeja" + id_meja);
+        if (!pilihMeja) return;
+        
+        pilihMeja.style.border = "2px dashed rgba(255, 255, 255, 1)"
+    });
 </script>
 
 <style>
     .grid-meja {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
-        grid-template-rows: repeat(5, 1fr);
+        grid-template-rows: repeat(1, 1fr);
         gap: 8px;
+        padding-bottom: 10px;
     } 
     .grid-meja .meja {
         color: #fff;
@@ -29,5 +38,18 @@ let params = Astro.url.search.split("&")[0];
         border-radius: 8px;
         cursor: pointer;
         text-decoration: none;
+        transition: all 0.4s ease-in-out;
+        border: 2px dashed rgba(0, 0, 0, 0);
+    }
+    .kosong {
+        background-color: #136cc0;
+        transition: all 0.4s ease-in-out;
+    }
+    .kosong:hover {
+        background-color: #0d4c86;
+    }
+    .digunakan {
+        background-color: #ff8176;
+        pointer-events: none;
     }
 </style>

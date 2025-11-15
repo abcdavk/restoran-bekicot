@@ -6,15 +6,16 @@ import Layout from "../layouts/Layout.astro";
 import Meja from "../components/Meja.astro"
 import * as ImageLoader from "../scripts/imageLoader";
 import {  getDatabase } from "../scripts/database";
+export const prerender = false;
 
 const { res: dataMeja } = await getDatabase("meja") as any;
 // biar bisa ngambil parameter url
-export const prerender = false;
-
-const { id_menu } = Object.fromEntries(Astro.url.searchParams.entries());
-
+const { id_menu, id_meja, jumlah_pesanan } = Object.fromEntries(Astro.url.searchParams.entries());
 const { res: menus } = await getDatabase("menu", `WHERE id_menu = ${id_menu}`) as any;
-const menu = menus[0]
+const menu = menus[0];
+console.log(id_meja)
+
+let jml_pesanan = parseInt(jumlah_pesanan.split(",")[0]);
 
 ---
 
@@ -37,10 +38,28 @@ const menu = menus[0]
                     </div>
                 </div>
             </div>
+            <div class="jumlah-pesanan">
+                <div>Jumlah Pesanan:</div>
+                <div class="input-jumlah">
+                    <a href={`/pesan?id_menu=${id_menu}&jumlah_pesanan=${jml_pesanan > 1 ? jml_pesanan-1 : jml_pesanan},${id_meja ? `&id_meja=${id_meja}` : "" }`}>-</a>
+                    <form>
+                        <input type="text" name="" id="inputJumlah" value={jml_pesanan}>
+                    </form>
+                    <a href={`/pesan?id_menu=${id_menu}&jumlah_pesanan=${jml_pesanan+1},${id_meja ? `&id_meja=${id_meja}` : "" }`}>+</a>
+                </div>
+            </div>
             <h3>Detail Pesanan</h3>
             <div class="detail-pesanan">
                 <p>Pilih meja: </p>
                 <Meja dataMeja={dataMeja}/>
+                {
+                    id_meja ? <div class="info-meja">
+                        <p>Nomor Meja: {id_meja}</p>
+                        <p>Kapasitas: {dataMeja[parseInt(id_meja)-1]?.kapasitas}</p>
+                        <p>Lokasi: {dataMeja[parseInt(id_meja)]?.lokasi}</p>
+                    </div> : ""
+                }
+                
             </div>
         </div>
         <div class="container-item">
@@ -48,6 +67,14 @@ const menu = menus[0]
         </div>
     </div>
 </Layout>
+
+<script>
+    const inputJumlah = document.getElementById("inputJumlah") as HTMLInputElement;
+    if (!inputJumlah) return;
+
+    inputJumlah.addEventListener("input", () => {
+    });
+</script>
 
 <style>
     html, body {
@@ -77,6 +104,7 @@ const menu = menus[0]
     .pesanan {
         background-color: #f0f0f0;
         border-radius: 8px;
+        margin-bottom: 10px;
         overflow: hidden;
         display: flex;
         gap: 10px;
@@ -88,10 +116,47 @@ const menu = menus[0]
         border-radius: 8px;
     }
 
+    .info-meja {
+        padding-bottom: 10px;
+    }
+
+    .info-meja p {
+        line-height: 8px;
+    }
+
     .pesanan img {
         width: 120px;
         height: 100%;
     }
+
+    .jumlah-pesanan {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .input-jumlah {
+        display: flex;
+        gap: 10px;
+    }
+
+    .input-jumlah a {
+        background-color: #1581e7;
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        text-align: center;
+        width: 24px;
+        border-radius: 30px;
+    }
+
+    .input-jumlah input {
+        width: 50px;
+    }
+
+    
+	input:focus {
+		outline: none;
+	}
 
     .info-pesanan {
         line-height: 10px;
@@ -124,10 +189,11 @@ const menu = menus[0]
         background-color: #136cc0;
     }
 
-    @media only screen and (min-width: 900px) {
+    @media only screen and (min-width: 1300px) {
         .container {
             justify-content: center;
-            width: 60%;
+            width: 40%;
+            height: 100%;
             margin: auto;
         }
     }
